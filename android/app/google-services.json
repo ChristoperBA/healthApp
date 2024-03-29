@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "876116438315",
+    "project_id": "health-app-areiqs",
+    "storage_bucket": "health-app-areiqs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876116438315:android:c75f292d234fef41c0696e",
+        "android_client_info": {
+          "package_name": "com.mycompany.healthapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5jPD6J0nYiNnbkGZ9801VmCaEAWdhRIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
