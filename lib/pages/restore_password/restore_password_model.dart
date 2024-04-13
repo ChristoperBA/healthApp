@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -12,10 +13,10 @@ class RestorePasswordModel extends FlutterFlowModel<RestorePasswordWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
+  // State field(s) for txtEmail widget.
+  FocusNode? txtEmailFocusNode;
+  TextEditingController? txtEmailController;
+  String? Function(BuildContext, String?)? txtEmailControllerValidator;
 
   @override
   void initState(BuildContext context) {}
@@ -23,7 +24,7 @@ class RestorePasswordModel extends FlutterFlowModel<RestorePasswordWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
+    txtEmailFocusNode?.dispose();
+    txtEmailController?.dispose();
   }
 }

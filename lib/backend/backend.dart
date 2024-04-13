@@ -1,9 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../auth/firebase_auth/auth_util.dart';
 
 import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/util/firestore_util.dart';
 
-import 'schema/user_record.dart';
+import 'schema/users_record.dart';
+import 'schema/citas_medicas_record.dart';
+import 'schema/actividad_sueno_record.dart';
+import 'schema/detalles_sueno_record.dart';
+import 'schema/consejo_sueno_record.dart';
+import 'schema/registro_comida_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,40 +18,230 @@ export 'schema/index.dart';
 export 'schema/util/firestore_util.dart';
 export 'schema/util/schema_util.dart';
 
-export 'schema/user_record.dart';
+export 'schema/users_record.dart';
+export 'schema/citas_medicas_record.dart';
+export 'schema/actividad_sueno_record.dart';
+export 'schema/detalles_sueno_record.dart';
+export 'schema/consejo_sueno_record.dart';
+export 'schema/registro_comida_record.dart';
 
-/// Functions to query UserRecords (as a Stream and as a Future).
-Future<int> queryUserRecordCount({
+/// Functions to query UsersRecords (as a Stream and as a Future).
+Future<int> queryUsersRecordCount({
   Query Function(Query)? queryBuilder,
   int limit = -1,
 }) =>
     queryCollectionCount(
-      UserRecord.collection,
+      UsersRecord.collection,
       queryBuilder: queryBuilder,
       limit: limit,
     );
 
-Stream<List<UserRecord>> queryUserRecord({
+Stream<List<UsersRecord>> queryUsersRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      UserRecord.collection,
-      UserRecord.fromSnapshot,
+      UsersRecord.collection,
+      UsersRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<UserRecord>> queryUserRecordOnce({
+Future<List<UsersRecord>> queryUsersRecordOnce({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      UserRecord.collection,
-      UserRecord.fromSnapshot,
+      UsersRecord.collection,
+      UsersRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query CitasMedicasRecords (as a Stream and as a Future).
+Future<int> queryCitasMedicasRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      CitasMedicasRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<CitasMedicasRecord>> queryCitasMedicasRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CitasMedicasRecord.collection,
+      CitasMedicasRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CitasMedicasRecord>> queryCitasMedicasRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CitasMedicasRecord.collection,
+      CitasMedicasRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query ActividadSuenoRecords (as a Stream and as a Future).
+Future<int> queryActividadSuenoRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ActividadSuenoRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ActividadSuenoRecord>> queryActividadSuenoRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ActividadSuenoRecord.collection,
+      ActividadSuenoRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ActividadSuenoRecord>> queryActividadSuenoRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ActividadSuenoRecord.collection,
+      ActividadSuenoRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query DetallesSuenoRecords (as a Stream and as a Future).
+Future<int> queryDetallesSuenoRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      DetallesSuenoRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<DetallesSuenoRecord>> queryDetallesSuenoRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      DetallesSuenoRecord.collection,
+      DetallesSuenoRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<DetallesSuenoRecord>> queryDetallesSuenoRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      DetallesSuenoRecord.collection,
+      DetallesSuenoRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query ConsejoSuenoRecords (as a Stream and as a Future).
+Future<int> queryConsejoSuenoRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ConsejoSuenoRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ConsejoSuenoRecord>> queryConsejoSuenoRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ConsejoSuenoRecord.collection,
+      ConsejoSuenoRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ConsejoSuenoRecord>> queryConsejoSuenoRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ConsejoSuenoRecord.collection,
+      ConsejoSuenoRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query RegistroComidaRecords (as a Stream and as a Future).
+Future<int> queryRegistroComidaRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      RegistroComidaRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<RegistroComidaRecord>> queryRegistroComidaRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      RegistroComidaRecord.collection,
+      RegistroComidaRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<RegistroComidaRecord>> queryRegistroComidaRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      RegistroComidaRecord.collection,
+      RegistroComidaRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
@@ -189,4 +386,34 @@ Future<FFFirestorePage<T>> queryCollectionPage<T>(
   final dataStream = docSnapshotStream?.map(getDocs);
   final nextPageToken = docSnapshot.docs.isEmpty ? null : docSnapshot.docs.last;
   return FFFirestorePage(data, dataStream, nextPageToken);
+}
+
+// Creates a Firestore document representing the logged in user if it doesn't yet exist
+Future maybeCreateUser(User user) async {
+  final userRecord = UsersRecord.collection.doc(user.uid);
+  final userExists = await userRecord.get().then((u) => u.exists);
+  if (userExists) {
+    currentUserDocument = await UsersRecord.getDocumentOnce(userRecord);
+    return;
+  }
+
+  final userData = createUsersRecordData(
+    email: user.email ??
+        FirebaseAuth.instance.currentUser?.email ??
+        user.providerData.firstOrNull?.email,
+    displayName:
+        user.displayName ?? FirebaseAuth.instance.currentUser?.displayName,
+    photoUrl: user.photoURL,
+    uid: user.uid,
+    phoneNumber: user.phoneNumber,
+    createdTime: getCurrentTimestamp,
+  );
+
+  await userRecord.set(userData);
+  currentUserDocument = UsersRecord.getDocumentFromData(userData, userRecord);
+}
+
+Future updateUserDocument({String? email}) async {
+  await currentUserDocument?.reference
+      .update(createUsersRecordData(email: email));
 }

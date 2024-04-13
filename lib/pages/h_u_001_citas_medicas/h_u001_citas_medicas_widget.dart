@@ -1,3 +1,6 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
+import '/components/citas_form_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -5,25 +8,26 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'hu004_model.dart';
-export 'hu004_model.dart';
+import 'h_u001_citas_medicas_model.dart';
+export 'h_u001_citas_medicas_model.dart';
 
-class Hu004Widget extends StatefulWidget {
-  const Hu004Widget({super.key});
+class HU001CitasMedicasWidget extends StatefulWidget {
+  const HU001CitasMedicasWidget({super.key});
 
   @override
-  State<Hu004Widget> createState() => _Hu004WidgetState();
+  State<HU001CitasMedicasWidget> createState() =>
+      _HU001CitasMedicasWidgetState();
 }
 
-class _Hu004WidgetState extends State<Hu004Widget> {
-  late Hu004Model _model;
+class _HU001CitasMedicasWidgetState extends State<HU001CitasMedicasWidget> {
+  late HU001CitasMedicasModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => Hu004Model());
+    _model = createModel(context, () => HU001CitasMedicasModel());
   }
 
   @override
@@ -47,21 +51,171 @@ class _Hu004WidgetState extends State<Hu004Widget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [],
+              Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                      width: 345.0,
+                      height: 70.0,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF3685CD),
+                        borderRadius: BorderRadius.circular(24.0),
+                      ),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+                        child: Text(
+                          'Recordatorios de Citas Médicas',
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: 'Readex Pro',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 20.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w800,
+                              ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
-                children: [],
+                children: [
+                  Container(
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    height: 200.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                    ),
+                    child: AuthUserStreamWidget(
+                      builder: (context) =>
+                          StreamBuilder<List<CitasMedicasRecord>>(
+                        stream: queryCitasMedicasRecord(
+                          queryBuilder: (citasMedicasRecord) =>
+                              citasMedicasRecord.where(
+                            'username',
+                            isEqualTo: currentUserDisplayName,
+                          ),
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          List<CitasMedicasRecord>
+                              listViewCitasMedicasRecordList = snapshot.data!;
+                          return ListView.builder(
+                            padding: EdgeInsets.zero,
+                            scrollDirection: Axis.vertical,
+                            itemCount: listViewCitasMedicasRecordList.length,
+                            itemBuilder: (context, listViewIndex) {
+                              final listViewCitasMedicasRecord =
+                                  listViewCitasMedicasRecordList[listViewIndex];
+                              return ListTile(
+                                title: Text(
+                                  listViewCitasMedicasRecord.tipo,
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleLarge
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                                subtitle: Text(
+                                  listViewCitasMedicasRecord.fecha!.toString(),
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 20.0,
+                                ),
+                                tileColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                dense: false,
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
-                children: [],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [],
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FFButtonWidget(
+                    onPressed: () async {
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return GestureDetector(
+                            onTap: () => _model.unfocusNode.canRequestFocus
+                                ? FocusScope.of(context)
+                                    .requestFocus(_model.unfocusNode)
+                                : FocusScope.of(context).unfocus(),
+                            child: Padding(
+                              padding: MediaQuery.viewInsetsOf(context),
+                              child: CitasFormWidget(),
+                            ),
+                          );
+                        },
+                      ).then((value) => safeSetState(() {}));
+                    },
+                    text: 'Crear Cita',
+                    options: FFButtonOptions(
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: Color(0xFF3685CD),
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Readex Pro',
+                                color: Colors.white,
+                                letterSpacing: 0.0,
+                              ),
+                      elevation: 3.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                ],
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -96,7 +250,7 @@ class _Hu004WidgetState extends State<Hu004Widget> {
                                         .override(
                                           fontFamily: 'Readex Pro',
                                           color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
+                                              .primaryText,
                                           letterSpacing: 0.0,
                                         ),
                                   ),

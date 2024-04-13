@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -167,7 +168,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
                             ),
-                        minLines: null,
                         validator: _model.txtEmailControllerValidator
                             .asValidator(context),
                       ),
@@ -247,7 +247,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
                             ),
-                        minLines: null,
                         validator: _model.txtPasswordControllerValidator
                             .asValidator(context),
                       ),
@@ -272,14 +271,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(160.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      'Hello World',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            color: Color(0xFF3685CD),
-                            letterSpacing: 0.0,
-                          ),
+                        EdgeInsetsDirectional.fromSTEB(100.0, 0.0, 0.0, 0.0),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('restorePassword');
+                      },
+                      child: Text(
+                        'Olvidaste la contraseñá',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              color: Color(0xFF3685CD),
+                              letterSpacing: 0.0,
+                              decoration: TextDecoration.underline,
+                            ),
+                      ),
                     ),
                   ),
                 ],
@@ -291,8 +300,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FFButtonWidget(
-                      onPressed: () {
-                        print('btnIngresar pressed ...');
+                      onPressed: () async {
+                        GoRouter.of(context).prepareAuthEvent();
+
+                        final user = await authManager.signInWithEmail(
+                          context,
+                          _model.txtEmailController.text,
+                          _model.txtPasswordController.text,
+                        );
+                        if (user == null) {
+                          return;
+                        }
+
+                        context.goNamedAuth('Menu', context.mounted);
                       },
                       text: 'Ingresar',
                       options: FFButtonOptions(
@@ -342,13 +362,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(60.0, 0.0, 0.0, 0.0),
-                      child: Text(
-                        'Crear Cuenta',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Readex Pro',
-                              color: Color(0xFF3685CD),
-                              letterSpacing: 0.0,
-                            ),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('createAccount');
+                        },
+                        child: Text(
+                          'Crear Cuenta',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Color(0xFF3685CD),
+                                    letterSpacing: 0.0,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                        ),
                       ),
                     ),
                   ],

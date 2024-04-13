@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -26,8 +27,8 @@ class _RestorePasswordWidgetState extends State<RestorePasswordWidget> {
     super.initState();
     _model = createModel(context, () => RestorePasswordModel());
 
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.txtEmailController ??= TextEditingController();
+    _model.txtEmailFocusNode ??= FocusNode();
   }
 
   @override
@@ -63,8 +64,8 @@ class _RestorePasswordWidgetState extends State<RestorePasswordWidget> {
                 color: FlutterFlowTheme.of(context).primaryText,
                 size: 30.0,
               ),
-              onPressed: () {
-                print('IconButton pressed ...');
+              onPressed: () async {
+                context.pushNamed('Menu');
               },
             ),
             title: Padding(
@@ -196,8 +197,8 @@ class _RestorePasswordWidgetState extends State<RestorePasswordWidget> {
                     child: Padding(
                       padding: EdgeInsets.all(25.0),
                       child: TextFormField(
-                        controller: _model.textController,
-                        focusNode: _model.textFieldFocusNode,
+                        controller: _model.txtEmailController,
+                        focusNode: _model.txtEmailFocusNode,
                         autofocus: true,
                         obscureText: false,
                         decoration: InputDecoration(
@@ -250,9 +251,8 @@ class _RestorePasswordWidgetState extends State<RestorePasswordWidget> {
                               fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
                             ),
-                        minLines: null,
-                        validator:
-                            _model.textControllerValidator.asValidator(context),
+                        validator: _model.txtEmailControllerValidator
+                            .asValidator(context),
                       ),
                     ),
                   ),
@@ -266,8 +266,21 @@ class _RestorePasswordWidgetState extends State<RestorePasswordWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                     child: FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
+                      onPressed: () async {
+                        if (_model.txtEmailController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Email required!',
+                              ),
+                            ),
+                          );
+                          return;
+                        }
+                        await authManager.resetPassword(
+                          email: _model.txtEmailController.text,
+                          context: context,
+                        );
                       },
                       text: 'Restablecer Contraseña',
                       options: FFButtonOptions(
@@ -305,8 +318,8 @@ class _RestorePasswordWidgetState extends State<RestorePasswordWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 180.0, 0.0, 0.0),
                     child: FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
+                      onPressed: () async {
+                        context.pushNamed('HomePage');
                       },
                       text: 'Regresar al inicio',
                       options: FFButtonOptions(

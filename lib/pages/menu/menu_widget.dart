@@ -59,8 +59,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                 color: FlutterFlowTheme.of(context).primaryText,
                 size: 30.0,
               ),
-              onPressed: () {
-                print('IconButton pressed ...');
+              onPressed: () async {
+                context.pushNamed('HomePage');
               },
             ),
             title: Padding(
@@ -260,17 +260,21 @@ class _MenuWidgetState extends State<MenuWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'Actividad \nFisica',
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: Colors.white,
-                                      fontSize: 12.0,
-                                      letterSpacing: 0.0,
-                                    ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 10.0),
+                                child: Text(
+                                  'Alimentación',
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: Colors.white,
+                                        fontSize: 12.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
                               ),
                             ],
                           ),
@@ -284,7 +288,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.asset(
-                                    'assets/images/images.jpeg',
+                                    'assets/images/saludable.jpeg',
                                     width: 79.0,
                                     height: 64.0,
                                     fit: BoxFit.cover,
@@ -301,8 +305,9 @@ class _MenuWidgetState extends State<MenuWidget> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
+                                  onPressed: () async {
+                                    context.pushNamed(
+                                        'HU_004_RegistroAlimenticio');
                                   },
                                   text: 'Ingresar',
                                   options: FFButtonOptions(
@@ -353,17 +358,21 @@ class _MenuWidgetState extends State<MenuWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'Actividad \nFisica',
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Colors.white,
-                                    fontSize: 12.0,
-                                    letterSpacing: 0.0,
-                                  ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 5.0, 0.0, 10.0),
+                              child: Text(
+                                'Medicamentos',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color: Colors.white,
+                                      fontSize: 12.0,
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
                             ),
                           ],
                         ),
@@ -377,7 +386,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: Image.asset(
-                                  'assets/images/images.jpeg',
+                                  'assets/images/medicinas.jpeg',
                                   width: 79.0,
                                   height: 64.0,
                                   fit: BoxFit.cover,
@@ -456,17 +465,21 @@ class _MenuWidgetState extends State<MenuWidget> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  'Actividad \nFisica',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: Colors.white,
-                                        fontSize: 12.0,
-                                        letterSpacing: 0.0,
-                                      ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 5.0, 0.0, 10.0),
+                                  child: Text(
+                                    'Consejos',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: Colors.white,
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -480,7 +493,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: Image.asset(
-                                      'assets/images/images.jpeg',
+                                      'assets/images/consejos.jpeg',
                                       width: 79.0,
                                       height: 64.0,
                                       fit: BoxFit.cover,
@@ -497,8 +510,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
+                                    onPressed: () async {
+                                      context.pushNamed('HU_006_Consejos');
                                     },
                                     text: 'Ingresar',
                                     options: FFButtonOptions(
@@ -554,17 +567,21 @@ class _MenuWidgetState extends State<MenuWidget> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  'Actividad \nFisica',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: Colors.white,
-                                        fontSize: 12.0,
-                                        letterSpacing: 0.0,
-                                      ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 5.0, 0.0, 10.0),
+                                  child: Text(
+                                    'Sueño',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: Colors.white,
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -578,7 +595,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: Image.asset(
-                                      'assets/images/images.jpeg',
+                                      'assets/images/suenos.jpeg',
                                       width: 79.0,
                                       height: 64.0,
                                       fit: BoxFit.cover,
@@ -595,8 +612,9 @@ class _MenuWidgetState extends State<MenuWidget> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
+                                    onPressed: () async {
+                                      context
+                                          .pushNamed('HU_007_ActividadSueno');
                                     },
                                     text: 'Ingresar',
                                     options: FFButtonOptions(
@@ -649,17 +667,21 @@ class _MenuWidgetState extends State<MenuWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'Actividad \nFisica',
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: Colors.white,
-                                      fontSize: 12.0,
-                                      letterSpacing: 0.0,
-                                    ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 10.0),
+                                child: Text(
+                                  'Salud',
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: Colors.white,
+                                        fontSize: 12.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
                               ),
                             ],
                           ),
@@ -673,7 +695,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.asset(
-                                    'assets/images/images.jpeg',
+                                    'assets/images/images.png',
                                     width: 79.0,
                                     height: 64.0,
                                     fit: BoxFit.cover,
@@ -754,7 +776,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Actividad \nFisica',
+                                  'Citas\nMedicas',
                                   textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -777,7 +799,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: Image.asset(
-                                      'assets/images/images.jpeg',
+                                      'assets/images/citas.jpeg',
                                       width: 79.0,
                                       height: 64.0,
                                       fit: BoxFit.cover,
@@ -794,8 +816,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
+                                    onPressed: () async {
+                                      context.pushNamed('HU_001_CitasMedicas');
                                     },
                                     text: 'Ingresar',
                                     options: FFButtonOptions(
@@ -851,17 +873,21 @@ class _MenuWidgetState extends State<MenuWidget> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  'Actividad \nFisica',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: Colors.white,
-                                        fontSize: 12.0,
-                                        letterSpacing: 0.0,
-                                      ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 5.0, 0.0, 10.0),
+                                  child: Text(
+                                    'Dispositivos',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: Colors.white,
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -875,7 +901,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: Image.asset(
-                                      'assets/images/images.jpeg',
+                                      'assets/images/smartwatch.jpg',
                                       width: 79.0,
                                       height: 64.0,
                                       fit: BoxFit.cover,
@@ -946,17 +972,21 @@ class _MenuWidgetState extends State<MenuWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'Actividad \nFisica',
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: Colors.white,
-                                      fontSize: 12.0,
-                                      letterSpacing: 0.0,
-                                    ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 10.0),
+                                child: Text(
+                                  'Noticias',
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: Colors.white,
+                                        fontSize: 12.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
                               ),
                             ],
                           ),
@@ -970,7 +1000,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.asset(
-                                    'assets/images/images.jpeg',
+                                    'assets/images/maxresdefault.jpg',
                                     width: 79.0,
                                     height: 64.0,
                                     fit: BoxFit.cover,

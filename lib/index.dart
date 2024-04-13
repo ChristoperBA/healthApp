@@ -5,13 +5,17 @@ export '/pages/create_account/create_account_widget.dart'
 export '/pages/restore_password/restore_password_widget.dart'
     show RestorePasswordWidget;
 export '/pages/menu/menu_widget.dart' show MenuWidget;
-export '/pages/hu_001/hu001_widget.dart' show Hu001Widget;
+export '/pages/h_u_001_citas_medicas/h_u001_citas_medicas_widget.dart'
+    show HU001CitasMedicasWidget;
 export '/pages/hu_002/hu002_widget.dart' show Hu002Widget;
 export '/pages/hu_003/hu003_widget.dart' show Hu003Widget;
-export '/pages/hu_004/hu004_widget.dart' show Hu004Widget;
-export '/pages/hu_006/hu006_widget.dart' show Hu006Widget;
+export '/pages/h_u_004_registro_alimenticio/h_u004_registro_alimenticio_widget.dart'
+    show HU004RegistroAlimenticioWidget;
+export '/pages/h_u_006_consejos/h_u006_consejos_widget.dart'
+    show HU006ConsejosWidget;
 export '/pages/hu_005/hu005_widget.dart' show Hu005Widget;
-export '/pages/hu_007/hu007_widget.dart' show Hu007Widget;
+export '/pages/h_u_007_actividad_sueno/h_u007_actividad_sueno_widget.dart'
+    show HU007ActividadSuenoWidget;
 export '/pages/hu_009/hu009_widget.dart' show Hu009Widget;
 export '/pages/hu_008/hu008_widget.dart' show Hu008Widget;
 export '/pages/hu_010/hu010_widget.dart' show Hu010Widget;
