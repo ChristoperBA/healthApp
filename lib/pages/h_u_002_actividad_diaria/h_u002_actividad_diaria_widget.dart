@@ -396,21 +396,21 @@ class _HU002ActividadDiariaWidgetState
                                   shape: BoxShape.circle,
                                 ),
                                 child: CircularPercentIndicator(
-                                  percent: 0.75,
+                                  percent: 1.0,
                                   radius: 36.0,
                                   lineWidth: 12.0,
                                   animation: true,
                                   animateFromLastPercent: true,
-                                  progressColor:
-                                      FlutterFlowTheme.of(context).primary,
+                                  progressColor: Color(0xFF3685CD),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).accent4,
                                   center: Text(
-                                    '75%',
+                                    '100%',
                                     style: FlutterFlowTheme.of(context)
                                         .headlineSmall
                                         .override(
                                           fontFamily: 'Outfit',
+                                          fontSize: 20.0,
                                           letterSpacing: 0.0,
                                         ),
                                   ),

@@ -313,7 +313,8 @@ class _HomePageInicSesionWidgetState extends State<HomePageInicSesionWidget> {
                           return;
                         }
 
-                        context.goNamedAuth('Menu', context.mounted);
+                        context.goNamedAuth(
+                            'HomePage_InicSesion', context.mounted);
                       },
                       text: 'Ingresar',
                       options: FFButtonOptions(

@@ -79,14 +79,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? MenuWidget() : HomePageInicSesionWidget(),
+          appStateNotifier.loggedIn ? HomePageInicSesionWidget() : MenuWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? MenuWidget()
-              : HomePageInicSesionWidget(),
+              ? HomePageInicSesionWidget()
+              : MenuWidget(),
         ),
         FFRoute(
           name: 'HomePage_InicSesion',
@@ -352,7 +352,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/homePageInicSesion';
+            return '/menu';
           }
           return null;
         },
