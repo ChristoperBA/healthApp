@@ -30,16 +30,16 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
     super.initState();
     _model = createModel(context, () => CreateAccountModel());
 
-    _model.txtEmailController ??= TextEditingController();
+    _model.txtEmailTextController ??= TextEditingController();
     _model.txtEmailFocusNode ??= FocusNode();
 
-    _model.txtUsernameController ??= TextEditingController();
+    _model.txtUsernameTextController ??= TextEditingController();
     _model.txtUsernameFocusNode ??= FocusNode();
 
-    _model.txtPhoneController ??= TextEditingController();
+    _model.txtPhoneTextController ??= TextEditingController();
     _model.txtPhoneFocusNode ??= FocusNode();
 
-    _model.txtPasswordController ??= TextEditingController();
+    _model.txtPasswordTextController ??= TextEditingController();
     _model.txtPasswordFocusNode ??= FocusNode();
   }
 
@@ -65,30 +65,33 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
           child: AppBar(
             backgroundColor: Color(0xFF3685CD),
             automaticallyImplyLeading: false,
-            leading: FlutterFlowIconButton(
-              borderColor: Color(0xFF3685CD),
-              borderRadius: 20.0,
-              borderWidth: 1.0,
-              buttonSize: 40.0,
-              fillColor: Color(0xFF3685CD),
-              icon: Icon(
-                Icons.arrow_back_ios_sharp,
-                color: FlutterFlowTheme.of(context).primaryText,
-                size: 30.0,
+            leading: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+              child: FlutterFlowIconButton(
+                borderColor: Color(0xFF3685CD),
+                borderRadius: 20.0,
+                borderWidth: 1.0,
+                buttonSize: 40.0,
+                fillColor: Color(0xFF3685CD),
+                icon: Icon(
+                  Icons.arrow_back_ios_sharp,
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  size: 30.0,
+                ),
+                onPressed: () async {
+                  context.pushNamed('HomePage_InicSesion');
+                },
               ),
-              onPressed: () async {
-                context.pushNamed('HomePage');
-              },
             ),
             title: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(75.0, 0.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(33.0, 20.0, 0.0, 0.0),
               child: Text(
-                'CREA TU \nCUENTA',
+                'CREA TU CUENTA',
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Outfit',
                       color: Colors.white,
-                      fontSize: 25.0,
+                      fontSize: 20.0,
                       letterSpacing: 0.0,
                       fontWeight: FontWeight.w800,
                     ),
@@ -96,7 +99,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
             ),
             actions: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 25.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 25.0, 0.0),
                 child: FlutterFlowIconButton(
                   borderColor: Color(0xFF3685CD),
                   borderRadius: 20.0,
@@ -122,6 +125,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -130,7 +134,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                     child: Padding(
                       padding: EdgeInsets.all(25.0),
                       child: TextFormField(
-                        controller: _model.txtEmailController,
+                        controller: _model.txtEmailTextController,
                         focusNode: _model.txtEmailFocusNode,
                         autofocus: true,
                         obscureText: false,
@@ -182,7 +186,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                               fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
                             ),
-                        validator: _model.txtEmailControllerValidator
+                        validator: _model.txtEmailTextControllerValidator
                             .asValidator(context),
                       ),
                     ),
@@ -196,7 +200,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                     child: Padding(
                       padding: EdgeInsets.all(25.0),
                       child: TextFormField(
-                        controller: _model.txtUsernameController,
+                        controller: _model.txtUsernameTextController,
                         focusNode: _model.txtUsernameFocusNode,
                         autofocus: true,
                         obscureText: false,
@@ -248,7 +252,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                               fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
                             ),
-                        validator: _model.txtUsernameControllerValidator
+                        validator: _model.txtUsernameTextControllerValidator
                             .asValidator(context),
                       ),
                     ),
@@ -262,7 +266,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                     child: Padding(
                       padding: EdgeInsets.all(25.0),
                       child: TextFormField(
-                        controller: _model.txtPhoneController,
+                        controller: _model.txtPhoneTextController,
                         focusNode: _model.txtPhoneFocusNode,
                         autofocus: true,
                         obscureText: false,
@@ -314,7 +318,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                               fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
                             ),
-                        validator: _model.txtPhoneControllerValidator
+                        validator: _model.txtPhoneTextControllerValidator
                             .asValidator(context),
                       ),
                     ),
@@ -328,7 +332,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                     child: Padding(
                       padding: EdgeInsets.all(25.0),
                       child: TextFormField(
-                        controller: _model.txtPasswordController,
+                        controller: _model.txtPasswordTextController,
                         focusNode: _model.txtPasswordFocusNode,
                         autofocus: true,
                         obscureText: !_model.txtPasswordVisibility,
@@ -393,7 +397,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                               fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
                             ),
-                        validator: _model.txtPasswordControllerValidator
+                        validator: _model.txtPasswordTextControllerValidator
                             .asValidator(context),
                       ),
                     ),
@@ -479,8 +483,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
 
                         final user = await authManager.createAccountWithEmail(
                           context,
-                          _model.txtEmailController.text,
-                          _model.txtPasswordController.text,
+                          _model.txtEmailTextController.text,
+                          _model.txtPasswordTextController.text,
                         );
                         if (user == null) {
                           return;
@@ -488,10 +492,10 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
 
                         await UsersRecord.collection.doc(user.uid).update({
                           ...createUsersRecordData(
-                            email: _model.txtEmailController.text,
-                            displayName: _model.txtUsernameController.text,
+                            email: _model.txtEmailTextController.text,
+                            displayName: _model.txtUsernameTextController.text,
                             photoUrl: _model.uploadedFileUrl,
-                            phoneNumber: _model.txtPhoneController.text,
+                            phoneNumber: _model.txtPhoneTextController.text,
                             uid: random_data.randomString(
                               1,
                               100,
@@ -525,7 +529,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                           },
                         );
 
-                        context.pushNamedAuth('HomePage', context.mounted);
+                        context.pushNamedAuth(
+                            'HomePage_InicSesion', context.mounted);
                       },
                       text: 'Crear Cuenta',
                       options: FFButtonOptions(

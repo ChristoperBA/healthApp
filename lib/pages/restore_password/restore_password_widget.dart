@@ -27,7 +27,7 @@ class _RestorePasswordWidgetState extends State<RestorePasswordWidget> {
     super.initState();
     _model = createModel(context, () => RestorePasswordModel());
 
-    _model.txtEmailController ??= TextEditingController();
+    _model.txtEmailTextController ??= TextEditingController();
     _model.txtEmailFocusNode ??= FocusNode();
   }
 
@@ -61,11 +61,11 @@ class _RestorePasswordWidgetState extends State<RestorePasswordWidget> {
               fillColor: Color(0xFF3685CD),
               icon: Icon(
                 Icons.arrow_back_ios_sharp,
-                color: FlutterFlowTheme.of(context).primaryText,
+                color: FlutterFlowTheme.of(context).secondaryBackground,
                 size: 30.0,
               ),
               onPressed: () async {
-                context.pushNamed('Menu');
+                context.pushNamed('HomePage_InicSesion');
               },
             ),
             title: Padding(
@@ -197,7 +197,7 @@ class _RestorePasswordWidgetState extends State<RestorePasswordWidget> {
                     child: Padding(
                       padding: EdgeInsets.all(25.0),
                       child: TextFormField(
-                        controller: _model.txtEmailController,
+                        controller: _model.txtEmailTextController,
                         focusNode: _model.txtEmailFocusNode,
                         autofocus: true,
                         obscureText: false,
@@ -251,7 +251,7 @@ class _RestorePasswordWidgetState extends State<RestorePasswordWidget> {
                               fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
                             ),
-                        validator: _model.txtEmailControllerValidator
+                        validator: _model.txtEmailTextControllerValidator
                             .asValidator(context),
                       ),
                     ),
@@ -267,7 +267,7 @@ class _RestorePasswordWidgetState extends State<RestorePasswordWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        if (_model.txtEmailController.text.isEmpty) {
+                        if (_model.txtEmailTextController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -278,7 +278,7 @@ class _RestorePasswordWidgetState extends State<RestorePasswordWidget> {
                           return;
                         }
                         await authManager.resetPassword(
-                          email: _model.txtEmailController.text,
+                          email: _model.txtEmailTextController.text,
                           context: context,
                         );
                       },
@@ -319,7 +319,7 @@ class _RestorePasswordWidgetState extends State<RestorePasswordWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 180.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed('HomePage');
+                        context.pushNamed('HomePage_InicSesion');
                       },
                       text: 'Regresar al inicio',
                       options: FFButtonOptions(

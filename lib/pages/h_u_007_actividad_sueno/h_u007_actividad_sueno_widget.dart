@@ -45,7 +45,7 @@ class _HU007ActividadSuenoWidgetState extends State<HU007ActividadSuenoWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).accent1,
+          backgroundColor: Color(0xFF3685CD),
           automaticallyImplyLeading: false,
           leading: InkWell(
             splashColor: Colors.transparent,
@@ -53,11 +53,11 @@ class _HU007ActividadSuenoWidgetState extends State<HU007ActividadSuenoWidget> {
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () async {
-              context.safePop();
+              context.pushNamed('Menu');
             },
             child: Icon(
               Icons.arrow_back_ios_new,
-              color: FlutterFlowTheme.of(context).secondaryText,
+              color: FlutterFlowTheme.of(context).secondaryBackground,
               size: 24.0,
             ),
           ),
@@ -79,15 +79,78 @@ class _HU007ActividadSuenoWidgetState extends State<HU007ActividadSuenoWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
-                child: Padding(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Align(
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: StreamBuilder<List<ActividadSuenoRecord>>(
+                      stream: queryActividadSuenoRecord(),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  FlutterFlowTheme.of(context).primary,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        List<ActividadSuenoRecord>
+                            listViewActividadSuenoRecordList = snapshot.data!;
+                        return ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: listViewActividadSuenoRecordList.length,
+                          itemBuilder: (context, listViewIndex) {
+                            final listViewActividadSuenoRecord =
+                                listViewActividadSuenoRecordList[listViewIndex];
+                            return ListTile(
+                              leading: Icon(
+                                Icons.nights_stay_rounded,
+                              ),
+                              title: Text(
+                                'Horas de Sueño',
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                              subtitle: Text(
+                                listViewActividadSuenoRecord.horaCompleta,
+                                style: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      fontSize: 17.5,
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                              tileColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              dense: false,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: StreamBuilder<List<ActividadSuenoRecord>>(
-                    stream: queryActividadSuenoRecord(),
+                  child: StreamBuilder<List<DetallesSuenoRecord>>(
+                    stream: queryDetallesSuenoRecord(),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -103,22 +166,22 @@ class _HU007ActividadSuenoWidgetState extends State<HU007ActividadSuenoWidget> {
                           ),
                         );
                       }
-                      List<ActividadSuenoRecord>
-                          listViewActividadSuenoRecordList = snapshot.data!;
+                      List<DetallesSuenoRecord>
+                          listViewDetallesSuenoRecordList = snapshot.data!;
                       return ListView.builder(
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
-                        itemCount: listViewActividadSuenoRecordList.length,
+                        itemCount: listViewDetallesSuenoRecordList.length,
                         itemBuilder: (context, listViewIndex) {
-                          final listViewActividadSuenoRecord =
-                              listViewActividadSuenoRecordList[listViewIndex];
+                          final listViewDetallesSuenoRecord =
+                              listViewDetallesSuenoRecordList[listViewIndex];
                           return ListTile(
-                            leading: Icon(
-                              Icons.nights_stay_rounded,
+                            leading: FaIcon(
+                              FontAwesomeIcons.chargingStation,
                             ),
                             title: Text(
-                              'Horas de Sueño',
+                              'Tiempo de Sueño Profundo',
                               style: FlutterFlowTheme.of(context)
                                   .titleLarge
                                   .override(
@@ -127,12 +190,12 @@ class _HU007ActividadSuenoWidgetState extends State<HU007ActividadSuenoWidget> {
                                   ),
                             ),
                             subtitle: Text(
-                              listViewActividadSuenoRecord.horaCompleta,
+                              listViewDetallesSuenoRecord.suenoProfundo,
                               style: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    fontSize: 17.5,
+                                    fontSize: 18.0,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -145,377 +208,320 @@ class _HU007ActividadSuenoWidgetState extends State<HU007ActividadSuenoWidget> {
                     },
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: StreamBuilder<List<DetallesSuenoRecord>>(
-                  stream: queryDetallesSuenoRecord(),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: StreamBuilder<List<DetallesSuenoRecord>>(
+                    stream: queryDetallesSuenoRecord(),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).primary,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }
-                    List<DetallesSuenoRecord> listViewDetallesSuenoRecordList =
-                        snapshot.data!;
-                    return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: listViewDetallesSuenoRecordList.length,
-                      itemBuilder: (context, listViewIndex) {
-                        final listViewDetallesSuenoRecord =
-                            listViewDetallesSuenoRecordList[listViewIndex];
-                        return ListTile(
-                          leading: FaIcon(
-                            FontAwesomeIcons.chargingStation,
-                          ),
-                          title: Text(
-                            'Tiempo de Sueño Profundo',
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Outfit',
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                          subtitle: Text(
-                            listViewDetallesSuenoRecord.suenoProfundo,
-                            style: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  fontSize: 18.0,
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                          tileColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          dense: false,
                         );
-                      },
-                    );
-                  },
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: StreamBuilder<List<DetallesSuenoRecord>>(
-                  stream: queryDetallesSuenoRecord(),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
+                      }
+                      List<DetallesSuenoRecord>
+                          listViewDetallesSuenoRecordList = snapshot.data!;
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: listViewDetallesSuenoRecordList.length,
+                        itemBuilder: (context, listViewIndex) {
+                          final listViewDetallesSuenoRecord =
+                              listViewDetallesSuenoRecordList[listViewIndex];
+                          return ListTile(
+                            leading: FaIcon(
+                              FontAwesomeIcons.headphones,
                             ),
-                          ),
-                        ),
+                            title: Text(
+                              'Nivel de Ronquido',
+                              style: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                            subtitle: Text(
+                              listViewDetallesSuenoRecord.nivelRonquidos,
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    fontSize: 18.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                            tileColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            dense: false,
+                          );
+                        },
                       );
-                    }
-                    List<DetallesSuenoRecord> listViewDetallesSuenoRecordList =
-                        snapshot.data!;
-                    return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: listViewDetallesSuenoRecordList.length,
-                      itemBuilder: (context, listViewIndex) {
-                        final listViewDetallesSuenoRecord =
-                            listViewDetallesSuenoRecordList[listViewIndex];
-                        return ListTile(
-                          leading: FaIcon(
-                            FontAwesomeIcons.headphones,
-                          ),
-                          title: Text(
-                            'Nivel de Ronquido',
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Outfit',
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                          subtitle: Text(
-                            listViewDetallesSuenoRecord.nivelRonquidos,
-                            style: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  fontSize: 18.0,
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                          tileColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          dense: false,
-                        );
-                      },
-                    );
-                  },
+                    },
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: StreamBuilder<List<DetallesSuenoRecord>>(
-                  stream: queryDetallesSuenoRecord(),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: StreamBuilder<List<DetallesSuenoRecord>>(
+                    stream: queryDetallesSuenoRecord(),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).primary,
+                              ),
                             ),
                           ),
-                        ),
+                        );
+                      }
+                      List<DetallesSuenoRecord>
+                          listViewDetallesSuenoRecordList = snapshot.data!;
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: listViewDetallesSuenoRecordList.length,
+                        itemBuilder: (context, listViewIndex) {
+                          final listViewDetallesSuenoRecord =
+                              listViewDetallesSuenoRecordList[listViewIndex];
+                          return ListTile(
+                            leading: FaIcon(
+                              FontAwesomeIcons.heartbeat,
+                            ),
+                            title: Text(
+                              'Ritmo Cardiaco ',
+                              style: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                            subtitle: Text(
+                              listViewDetallesSuenoRecord.ritmoCardiaco,
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    fontSize: 18.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                            tileColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            dense: false,
+                          );
+                        },
                       );
-                    }
-                    List<DetallesSuenoRecord> listViewDetallesSuenoRecordList =
-                        snapshot.data!;
-                    return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: listViewDetallesSuenoRecordList.length,
-                      itemBuilder: (context, listViewIndex) {
-                        final listViewDetallesSuenoRecord =
-                            listViewDetallesSuenoRecordList[listViewIndex];
-                        return ListTile(
-                          leading: FaIcon(
-                            FontAwesomeIcons.heartbeat,
-                          ),
-                          title: Text(
-                            'Ritmo Cardiaco ',
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Outfit',
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                          subtitle: Text(
-                            listViewDetallesSuenoRecord.ritmoCardiaco,
-                            style: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  fontSize: 18.0,
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                          tileColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          dense: false,
-                        );
-                      },
-                    );
-                  },
+                    },
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: StreamBuilder<List<ConsejoSuenoRecord>>(
-                  stream: queryConsejoSuenoRecord(),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: StreamBuilder<List<ConsejoSuenoRecord>>(
+                    stream: queryConsejoSuenoRecord(),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).primary,
+                              ),
                             ),
                           ),
-                        ),
+                        );
+                      }
+                      List<ConsejoSuenoRecord> listViewConsejoSuenoRecordList =
+                          snapshot.data!;
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: listViewConsejoSuenoRecordList.length,
+                        itemBuilder: (context, listViewIndex) {
+                          final listViewConsejoSuenoRecord =
+                              listViewConsejoSuenoRecordList[listViewIndex];
+                          return ListTile(
+                            leading: FaIcon(
+                              FontAwesomeIcons.solidUser,
+                            ),
+                            title: Text(
+                              'Consejo  para dormir mejor',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    fontSize: 20.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                            subtitle: Text(
+                              listViewConsejoSuenoRecord.consejo,
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    fontSize: 22.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                            tileColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            dense: false,
+                          );
+                        },
                       );
-                    }
-                    List<ConsejoSuenoRecord> listViewConsejoSuenoRecordList =
-                        snapshot.data!;
-                    return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: listViewConsejoSuenoRecordList.length,
-                      itemBuilder: (context, listViewIndex) {
-                        final listViewConsejoSuenoRecord =
-                            listViewConsejoSuenoRecordList[listViewIndex];
-                        return ListTile(
-                          leading: FaIcon(
-                            FontAwesomeIcons.solidUser,
-                          ),
-                          title: Text(
-                            'Consejo  para dormir mejor',
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Outfit',
-                                  fontSize: 20.0,
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                          subtitle: Text(
-                            listViewConsejoSuenoRecord.consejo,
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  fontSize: 22.0,
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                          tileColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          dense: false,
-                        );
-                      },
-                    );
-                  },
+                    },
+                  ),
                 ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 295.0,
-                            height: 68.0,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF3685CD),
-                              borderRadius: BorderRadius.circular(14.0),
-                              shape: BoxShape.rectangle,
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Hazte Premium por 14.99\$ al mes',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 5.0, 0.0, 0.0),
-                                  child: Row(
+                Align(
+                  alignment: AlignmentDirectional(0.0, 1.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 295.0,
+                              height: 68.0,
+                              decoration: BoxDecoration(
+                                color: Color(0xFF3685CD),
+                                borderRadius: BorderRadius.circular(14.0),
+                                shape: BoxShape.rectangle,
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Row(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 0.0, 0.0, 0.0),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/download__1_-removebg-preview.png',
-                                            width: 49.0,
-                                            height: 40.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            30.0, 0.0, 0.0, 0.0),
-                                        child: FFButtonWidget(
-                                          onPressed: () {
-                                            print('Button pressed ...');
-                                          },
-                                          text: 'Suscribirse',
-                                          options: FFButtonOptions(
-                                            height: 37.0,
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    24.0, 0.0, 24.0, 0.0),
-                                            iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            color: Color(0xFF5BB2FF),
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color: Colors.white,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                            elevation: 3.0,
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.0,
+                                      Text(
+                                        'Hazte Premium por 14.99\$ al mes',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              letterSpacing: 0.0,
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            20.0, 0.0, 0.0, 0.0),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/download__2_-removebg-preview.png',
-                                            width: 38.0,
-                                            height: 36.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 5.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 0.0, 0.0, 0.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/download__1_-removebg-preview.png',
+                                              width: 49.0,
+                                              height: 40.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  30.0, 0.0, 0.0, 0.0),
+                                          child: FFButtonWidget(
+                                            onPressed: () {
+                                              print('Button pressed ...');
+                                            },
+                                            text: 'Suscribirse',
+                                            options: FFButtonOptions(
+                                              height: 37.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      24.0, 0.0, 24.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color: Color(0xFF5BB2FF),
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              elevation: 3.0,
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(18.0),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  20.0, 0.0, 0.0, 0.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/download__2_-removebg-preview.png',
+                                              width: 38.0,
+                                              height: 36.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

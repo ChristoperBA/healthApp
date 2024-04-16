@@ -18,21 +18,21 @@ class CreateAccountModel extends FlutterFlowModel<CreateAccountWidget> {
   final unfocusNode = FocusNode();
   // State field(s) for txtEmail widget.
   FocusNode? txtEmailFocusNode;
-  TextEditingController? txtEmailController;
-  String? Function(BuildContext, String?)? txtEmailControllerValidator;
+  TextEditingController? txtEmailTextController;
+  String? Function(BuildContext, String?)? txtEmailTextControllerValidator;
   // State field(s) for txtUsername widget.
   FocusNode? txtUsernameFocusNode;
-  TextEditingController? txtUsernameController;
-  String? Function(BuildContext, String?)? txtUsernameControllerValidator;
+  TextEditingController? txtUsernameTextController;
+  String? Function(BuildContext, String?)? txtUsernameTextControllerValidator;
   // State field(s) for txtPhone widget.
   FocusNode? txtPhoneFocusNode;
-  TextEditingController? txtPhoneController;
-  String? Function(BuildContext, String?)? txtPhoneControllerValidator;
+  TextEditingController? txtPhoneTextController;
+  String? Function(BuildContext, String?)? txtPhoneTextControllerValidator;
   // State field(s) for txtPassword widget.
   FocusNode? txtPasswordFocusNode;
-  TextEditingController? txtPasswordController;
+  TextEditingController? txtPasswordTextController;
   late bool txtPasswordVisibility;
-  String? Function(BuildContext, String?)? txtPasswordControllerValidator;
+  String? Function(BuildContext, String?)? txtPasswordTextControllerValidator;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -47,15 +47,15 @@ class CreateAccountModel extends FlutterFlowModel<CreateAccountWidget> {
   void dispose() {
     unfocusNode.dispose();
     txtEmailFocusNode?.dispose();
-    txtEmailController?.dispose();
+    txtEmailTextController?.dispose();
 
     txtUsernameFocusNode?.dispose();
-    txtUsernameController?.dispose();
+    txtUsernameTextController?.dispose();
 
     txtPhoneFocusNode?.dispose();
-    txtPhoneController?.dispose();
+    txtPhoneTextController?.dispose();
 
     txtPasswordFocusNode?.dispose();
-    txtPasswordController?.dispose();
+    txtPasswordTextController?.dispose();
   }
 }

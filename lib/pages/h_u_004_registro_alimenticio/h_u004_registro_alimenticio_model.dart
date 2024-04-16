@@ -18,64 +18,64 @@ class HU004RegistroAlimenticioModel
   final unfocusNode = FocusNode();
   // State field(s) for Desayuno widget.
   FocusNode? desayunoFocusNode;
-  TextEditingController? desayunoController;
-  String? Function(BuildContext, String?)? desayunoControllerValidator;
+  TextEditingController? desayunoTextController;
+  String? Function(BuildContext, String?)? desayunoTextControllerValidator;
   // State field(s) for CalDesayuno widget.
   FocusNode? calDesayunoFocusNode;
-  TextEditingController? calDesayunoController;
-  String? Function(BuildContext, String?)? calDesayunoControllerValidator;
+  TextEditingController? calDesayunoTextController;
+  String? Function(BuildContext, String?)? calDesayunoTextControllerValidator;
   // State field(s) for Carb1 widget.
   FocusNode? carb1FocusNode;
-  TextEditingController? carb1Controller;
-  String? Function(BuildContext, String?)? carb1ControllerValidator;
+  TextEditingController? carb1TextController;
+  String? Function(BuildContext, String?)? carb1TextControllerValidator;
   // State field(s) for Prote1 widget.
   FocusNode? prote1FocusNode;
-  TextEditingController? prote1Controller;
-  String? Function(BuildContext, String?)? prote1ControllerValidator;
+  TextEditingController? prote1TextController;
+  String? Function(BuildContext, String?)? prote1TextControllerValidator;
   // State field(s) for Grasa1 widget.
   FocusNode? grasa1FocusNode;
-  TextEditingController? grasa1Controller;
-  String? Function(BuildContext, String?)? grasa1ControllerValidator;
+  TextEditingController? grasa1TextController;
+  String? Function(BuildContext, String?)? grasa1TextControllerValidator;
   // State field(s) for Almuerzo widget.
   FocusNode? almuerzoFocusNode;
-  TextEditingController? almuerzoController;
-  String? Function(BuildContext, String?)? almuerzoControllerValidator;
+  TextEditingController? almuerzoTextController;
+  String? Function(BuildContext, String?)? almuerzoTextControllerValidator;
   // State field(s) for CalAlmuerzo widget.
   FocusNode? calAlmuerzoFocusNode;
-  TextEditingController? calAlmuerzoController;
-  String? Function(BuildContext, String?)? calAlmuerzoControllerValidator;
+  TextEditingController? calAlmuerzoTextController;
+  String? Function(BuildContext, String?)? calAlmuerzoTextControllerValidator;
   // State field(s) for Carb2 widget.
   FocusNode? carb2FocusNode;
-  TextEditingController? carb2Controller;
-  String? Function(BuildContext, String?)? carb2ControllerValidator;
+  TextEditingController? carb2TextController;
+  String? Function(BuildContext, String?)? carb2TextControllerValidator;
   // State field(s) for Prote2 widget.
   FocusNode? prote2FocusNode;
-  TextEditingController? prote2Controller;
-  String? Function(BuildContext, String?)? prote2ControllerValidator;
+  TextEditingController? prote2TextController;
+  String? Function(BuildContext, String?)? prote2TextControllerValidator;
   // State field(s) for Grasa2 widget.
   FocusNode? grasa2FocusNode;
-  TextEditingController? grasa2Controller;
-  String? Function(BuildContext, String?)? grasa2ControllerValidator;
+  TextEditingController? grasa2TextController;
+  String? Function(BuildContext, String?)? grasa2TextControllerValidator;
   // State field(s) for Cena widget.
   FocusNode? cenaFocusNode;
-  TextEditingController? cenaController;
-  String? Function(BuildContext, String?)? cenaControllerValidator;
+  TextEditingController? cenaTextController;
+  String? Function(BuildContext, String?)? cenaTextControllerValidator;
   // State field(s) for CalCena widget.
   FocusNode? calCenaFocusNode;
-  TextEditingController? calCenaController;
-  String? Function(BuildContext, String?)? calCenaControllerValidator;
+  TextEditingController? calCenaTextController;
+  String? Function(BuildContext, String?)? calCenaTextControllerValidator;
   // State field(s) for Carb3 widget.
   FocusNode? carb3FocusNode;
-  TextEditingController? carb3Controller;
-  String? Function(BuildContext, String?)? carb3ControllerValidator;
+  TextEditingController? carb3TextController;
+  String? Function(BuildContext, String?)? carb3TextControllerValidator;
   // State field(s) for Prote3 widget.
   FocusNode? prote3FocusNode;
-  TextEditingController? prote3Controller;
-  String? Function(BuildContext, String?)? prote3ControllerValidator;
+  TextEditingController? prote3TextController;
+  String? Function(BuildContext, String?)? prote3TextControllerValidator;
   // State field(s) for Grasa3 widget.
   FocusNode? grasa3FocusNode;
-  TextEditingController? grasa3Controller;
-  String? Function(BuildContext, String?)? grasa3ControllerValidator;
+  TextEditingController? grasa3TextController;
+  String? Function(BuildContext, String?)? grasa3TextControllerValidator;
 
   @override
   void initState(BuildContext context) {}
@@ -84,48 +84,48 @@ class HU004RegistroAlimenticioModel
   void dispose() {
     unfocusNode.dispose();
     desayunoFocusNode?.dispose();
-    desayunoController?.dispose();
+    desayunoTextController?.dispose();
 
     calDesayunoFocusNode?.dispose();
-    calDesayunoController?.dispose();
+    calDesayunoTextController?.dispose();
 
     carb1FocusNode?.dispose();
-    carb1Controller?.dispose();
+    carb1TextController?.dispose();
 
     prote1FocusNode?.dispose();
-    prote1Controller?.dispose();
+    prote1TextController?.dispose();
 
     grasa1FocusNode?.dispose();
-    grasa1Controller?.dispose();
+    grasa1TextController?.dispose();
 
     almuerzoFocusNode?.dispose();
-    almuerzoController?.dispose();
+    almuerzoTextController?.dispose();
 
     calAlmuerzoFocusNode?.dispose();
-    calAlmuerzoController?.dispose();
+    calAlmuerzoTextController?.dispose();
 
     carb2FocusNode?.dispose();
-    carb2Controller?.dispose();
+    carb2TextController?.dispose();
 
     prote2FocusNode?.dispose();
-    prote2Controller?.dispose();
+    prote2TextController?.dispose();
 
     grasa2FocusNode?.dispose();
-    grasa2Controller?.dispose();
+    grasa2TextController?.dispose();
 
     cenaFocusNode?.dispose();
-    cenaController?.dispose();
+    cenaTextController?.dispose();
 
     calCenaFocusNode?.dispose();
-    calCenaController?.dispose();
+    calCenaTextController?.dispose();
 
     carb3FocusNode?.dispose();
-    carb3Controller?.dispose();
+    carb3TextController?.dispose();
 
     prote3FocusNode?.dispose();
-    prote3Controller?.dispose();
+    prote3TextController?.dispose();
 
     grasa3FocusNode?.dispose();
-    grasa3Controller?.dispose();
+    grasa3TextController?.dispose();
   }
 }

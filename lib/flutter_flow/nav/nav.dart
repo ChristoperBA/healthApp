@@ -79,18 +79,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? MenuWidget() : HomePageWidget(),
+          appStateNotifier.loggedIn ? MenuWidget() : HomePageInicSesionWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? MenuWidget() : HomePageWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? MenuWidget()
+              : HomePageInicSesionWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => HomePageWidget(),
+          name: 'HomePage_InicSesion',
+          path: '/homePageInicSesion',
+          builder: (context, params) => HomePageInicSesionWidget(),
         ),
         FFRoute(
           name: 'createAccount',
@@ -113,29 +114,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => HU001CitasMedicasWidget(),
         ),
         FFRoute(
-          name: 'HU_002',
-          path: '/hu002',
-          builder: (context, params) => Hu002Widget(),
-        ),
-        FFRoute(
-          name: 'HU_003',
-          path: '/hu003',
-          builder: (context, params) => Hu003Widget(),
-        ),
-        FFRoute(
           name: 'HU_004_RegistroAlimenticio',
           path: '/hU004RegistroAlimenticio',
           builder: (context, params) => HU004RegistroAlimenticioWidget(),
         ),
         FFRoute(
-          name: 'HU_006_Consejos',
-          path: '/hU006Consejos',
-          builder: (context, params) => HU006ConsejosWidget(),
+          name: 'HU_003_Consejos',
+          path: '/hU003Consejos',
+          builder: (context, params) => HU003ConsejosWidget(),
         ),
         FFRoute(
-          name: 'HU_005_',
-          path: '/hu005',
-          builder: (context, params) => Hu005Widget(),
+          name: 'HU_005_Medicamentos',
+          path: '/hU005Medicamentos',
+          builder: (context, params) => HU005MedicamentosWidget(),
         ),
         FFRoute(
           name: 'HU_007_ActividadSueno',
@@ -143,19 +134,54 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => HU007ActividadSuenoWidget(),
         ),
         FFRoute(
-          name: 'HU_009',
-          path: '/hu009',
-          builder: (context, params) => Hu009Widget(),
+          name: 'HU_008_DispositivosSalud',
+          path: '/hU008DispositivosSalud',
+          builder: (context, params) => HU008DispositivosSaludWidget(),
         ),
         FFRoute(
-          name: 'HU_008',
-          path: '/hu008',
-          builder: (context, params) => Hu008Widget(),
+          name: 'HU_002_ActividadDiaria',
+          path: '/hU002ActividadDiaria',
+          builder: (context, params) => HU002ActividadDiariaWidget(
+            consejosVar: params.getParam(
+              'consejosVar',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
-          name: 'HU_010',
-          path: '/hu010',
-          builder: (context, params) => Hu010Widget(),
+          name: 'HU_009_Noticias',
+          path: '/hU009Noticias',
+          builder: (context, params) => HU009NoticiasWidget(),
+        ),
+        FFRoute(
+          name: 'crearPublicacion',
+          path: '/crearPublicacion',
+          builder: (context, params) => CrearPublicacionWidget(),
+        ),
+        FFRoute(
+          name: 'Suscripcion',
+          path: '/suscripcion',
+          builder: (context, params) => SuscripcionWidget(),
+        ),
+        FFRoute(
+          name: 'Pago_form',
+          path: '/pagoForm',
+          builder: (context, params) => PagoFormWidget(
+            monto: params.getParam(
+              'monto',
+              ParamType.double,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Details25QuizPage',
+          path: '/details25QuizPage',
+          builder: (context, params) => Details25QuizPageWidget(),
+        ),
+        FFRoute(
+          name: 'HU_010_Salud',
+          path: '/hU010Salud',
+          builder: (context, params) => HU010SaludWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -232,7 +258,7 @@ extension _GoRouterStateExtensions on GoRouterState {
       extra != null ? extra as Map<String, dynamic> : {};
   Map<String, dynamic> get allParams => <String, dynamic>{}
     ..addAll(pathParameters)
-    ..addAll(queryParameters)
+    ..addAll(uri.queryParameters)
     ..addAll(extraMap);
   TransitionInfo get transitionInfo => extraMap.containsKey(kTransitionInfoKey)
       ? extraMap[kTransitionInfoKey] as TransitionInfo
@@ -325,8 +351,8 @@ class FFRoute {
           }
 
           if (requireAuth && !appStateNotifier.loggedIn) {
-            appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/homePage';
+            appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
+            return '/homePageInicSesion';
           }
           return null;
         },
@@ -404,7 +430,7 @@ class RootPageContext {
   static bool isInactiveRootPage(BuildContext context) {
     final rootPageContext = context.read<RootPageContext?>();
     final isRootPage = rootPageContext?.isRootPage ?? false;
-    final location = GoRouter.of(context).location;
+    final location = GoRouterState.of(context).uri.toString();
     return isRootPage &&
         location != '/' &&
         location != rootPageContext?.errorRoute;

@@ -55,7 +55,7 @@ class _CuidaAlimentWidgetState extends State<CuidaAlimentWidget> {
                 'Cuida tu alimentación',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Readex Pro',
-                      color: FlutterFlowTheme.of(context).secondary,
+                      color: Color(0xFF3685CD),
                       fontSize: 25.0,
                       letterSpacing: 0.0,
                       fontWeight: FontWeight.w500,

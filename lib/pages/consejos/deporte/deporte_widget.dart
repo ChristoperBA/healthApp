@@ -55,7 +55,7 @@ class _DeporteWidgetState extends State<DeporteWidget> {
                 'Haz deporte, ¡Muevete!',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Readex Pro',
-                      color: FlutterFlowTheme.of(context).secondary,
+                      color: Color(0xFF3685CD),
                       fontSize: 25.0,
                       letterSpacing: 0.0,
                       fontWeight: FontWeight.w500,
@@ -159,17 +159,19 @@ class _DeporteWidgetState extends State<DeporteWidget> {
                               24.0, 0.0, 24.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: Color(0xFF39D2C0),
-                          textStyle: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .override(
-                                fontFamily: 'Readex Pro',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                letterSpacing: 0.0,
-                              ),
+                          color: Color(0xFF3685CD),
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                           elevation: 3.0,
                           borderSide: BorderSide(
-                            color: Colors.transparent,
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),

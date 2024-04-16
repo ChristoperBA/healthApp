@@ -15,8 +15,8 @@ class RestorePasswordModel extends FlutterFlowModel<RestorePasswordWidget> {
   final unfocusNode = FocusNode();
   // State field(s) for txtEmail widget.
   FocusNode? txtEmailFocusNode;
-  TextEditingController? txtEmailController;
-  String? Function(BuildContext, String?)? txtEmailControllerValidator;
+  TextEditingController? txtEmailTextController;
+  String? Function(BuildContext, String?)? txtEmailTextControllerValidator;
 
   @override
   void initState(BuildContext context) {}
@@ -25,6 +25,6 @@ class RestorePasswordModel extends FlutterFlowModel<RestorePasswordWidget> {
   void dispose() {
     unfocusNode.dispose();
     txtEmailFocusNode?.dispose();
-    txtEmailController?.dispose();
+    txtEmailTextController?.dispose();
   }
 }
